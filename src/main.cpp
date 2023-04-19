@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_MCP4725.h>
 
 const int inPin1 = 7;
 const int inPin2 = 6;
