@@ -26,3 +26,19 @@ void ADC_measure::ADC_init() {
     Serial.print("Differential: "); Serial.print(current); Serial.print("("); Serial.print(current * multiplier); Serial.println("mV)");
     delay(_delay);
 }
+
+int ADC_measure::voltage_measure() {
+    int16_t voltage;
+    float multiplier = 0.1875F;
+    voltage = ads.readADC_Differential_0_1();
+    int get_voltage = voltage*multiplier;
+    return get_voltage;
+}
+
+int ADC_measure::current_measure() {
+    int16_t current;
+    float multiplier = 0.1875F;
+    current = ads.readADC_Differential_0_1();
+    int get_current = current*multiplier;
+    return get_current;
+}

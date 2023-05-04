@@ -15,7 +15,8 @@ class ADC_measure {
         Adafruit_ADS1115 ads;
         void ADC_setup();
         void ADC_init();
-
+        int voltage_measure();
+        int current_measure();
 };
 
 #endif
