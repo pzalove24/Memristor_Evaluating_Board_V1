@@ -4,7 +4,6 @@
 #include <Arduino.h>
 class TrafficLight {
 
-
     int _greenLED;
     int _yellowLED;
     int _redLED;

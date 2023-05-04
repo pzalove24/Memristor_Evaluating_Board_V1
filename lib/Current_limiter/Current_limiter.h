@@ -1,7 +1,21 @@
-#ifndef CURRENT_LIMITER_H
-#define CURRENT_LIMITER_H
-
+#ifndef Current_limiter_h
+#define Current_limiter_h
 #include <Arduino.h>
-void cl_init();
+
+class Current_limiter {
+    private:
+        
+        int _MohmPin;
+        int _HundredKohmPin;
+        int _TenKohmPin;
+        int _OneKohmPin;
+
+    public:
+        
+        Current_limiter(int MohmPin, int HundredKohmPin, int TenKohmPin, int OneKohmPin);
+        void Cl_PinSetup();
+        void Test_Sequence();
+        void Gain_R_feedback();
+};
 
 #endif
