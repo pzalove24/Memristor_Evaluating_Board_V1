@@ -14,7 +14,7 @@ class ADC_measure {
         ADC_measure(int delay = 10);
         Adafruit_ADS1115 ads;
         void ADC_setup();
-        void ADC_init();
+        void Test_Sequence();
         int voltage_measure();
         int current_measure();
 };

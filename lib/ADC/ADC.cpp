@@ -15,7 +15,7 @@ void ADC_measure::ADC_setup() {
     }
 }
 
-void ADC_measure::ADC_init() {
+void ADC_measure::Test_Sequence() {
     int16_t voltage;
     int16_t current;
     /* Be sure to update this value based on the IC and the gain settings! */

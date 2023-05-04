@@ -26,7 +26,7 @@ void setup() {
 
 void loop(){
   current_limiter.Test_Sequence();
-  adc_measure.ADC_init();
+  adc_measure.Test_Sequence();
   adc_measure.current_measure();
   delay(1000);
   adc_measure.voltage_measure();
