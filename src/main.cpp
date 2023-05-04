@@ -10,9 +10,9 @@
 
   /* Use this for the 16-bit version */
 
-Current_limiter current_limiter(7,6,5,4);
-ADC_measure adc_measure(100);
-#define FNC_PIN 8
+Current_limiter current_limiter(7,6,5,4); //pin digital number
+ADC_measure adc_measure(100); //delay
+#define FNC_PIN 8 //function generator at digital pin number
 AD9833 gen(FNC_PIN);
 
 
