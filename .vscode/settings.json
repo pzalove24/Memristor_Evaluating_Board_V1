@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/.pio/libdeps/megaatmega2560/Adafruit BusIO"
+    "cmake.sourceDirectory": "${workspaceFolder}/.pio/libdeps/megaatmega2560/Adafruit BusIO",
+    "C_Cpp.dimInactiveRegions": false
 }
