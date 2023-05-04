@@ -6,6 +6,7 @@
 #include <ADS1256.h>
 #include <MD_AD9833.h>
 #include <ADC.h>
+#include <AD9833.h>
 
   /* Use this for the 16-bit version */
 
