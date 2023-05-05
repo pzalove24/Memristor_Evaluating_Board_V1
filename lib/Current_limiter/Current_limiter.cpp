@@ -46,6 +46,35 @@ void Current_limiter::Test_Sequence() {
   delay(5000);
 };
 
+void Current_limiter::one_uA() {
+  digitalWrite(_MohmPin, HIGH);
+  digitalWrite(_HundredKohmPin, LOW);
+  digitalWrite(_TenKohmPin, LOW);
+  digitalWrite(_OneKohmPin, LOW);
+}
+
+void Current_limiter::ten_uA() {
+  digitalWrite(_MohmPin, LOW);
+  digitalWrite(_HundredKohmPin, HIGH);
+  digitalWrite(_TenKohmPin, LOW);
+  digitalWrite(_OneKohmPin, LOW);
+}
+
+void Current_limiter::hundred_uA() {
+  digitalWrite(_MohmPin, LOW);
+  digitalWrite(_HundredKohmPin, LOW);
+  digitalWrite(_TenKohmPin, HIGH);
+  digitalWrite(_OneKohmPin, LOW);
+}
+
+void Current_limiter::one_mA() {
+  digitalWrite(_MohmPin, LOW);
+  digitalWrite(_HundredKohmPin, LOW);
+  digitalWrite(_TenKohmPin, LOW);
+  digitalWrite(_OneKohmPin, HIGH);
+}
+
+
 void Current_limiter::Gain_R_feedback() {
   
 }

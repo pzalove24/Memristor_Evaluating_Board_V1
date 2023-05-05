@@ -16,6 +16,10 @@ class Current_limiter {
         void Cl_PinSetup();
         void Test_Sequence();
         void Gain_R_feedback();
+        void one_uA();
+        void ten_uA();
+        void hundred_uA();
+        void one_mA();
         
 };
 
