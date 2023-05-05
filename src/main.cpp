@@ -7,6 +7,7 @@
 #include <MD_AD9833.h>
 #include <ADC.h>
 #include <AD9833.h>
+#include <DAC.h>
 
   /* Use this for the 16-bit version */
 
@@ -14,6 +15,7 @@ Current_limiter current_limiter(7,6,5,4); //pin digital number
 ADC_measure adc_measure(100); //delay
 #define FNC_PIN 8 //function generator at digital pin number
 AD9833 gen(FNC_PIN);
+DAC_bias dac_bias;
 
 
 void setup() {
@@ -22,6 +24,7 @@ void setup() {
   adc_measure.ADC_setup();
   gen.Begin();
   gen.ApplySignal(TRIANGLE_WAVE, REG0,10000);
+  dac_bias.DAC_setup();
 }
 
 void loop(){
@@ -31,4 +34,5 @@ void loop(){
   delay(1000);
   adc_measure.voltage_measure();
   delay(1000);
+  dac_bias.Test_Sequence_Triangular_Wave();
 }
