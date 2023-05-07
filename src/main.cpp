@@ -17,7 +17,6 @@ ADC_measure adc_measure(100); //delay
 AD9833 gen(FNC_PIN);
 DAC_bias dac_bias;
 
-
 void setup() {
   Serial.begin(9600);
   current_limiter.Cl_PinSetup();
@@ -35,4 +34,5 @@ void loop(){
   adc_measure.voltage_measure();
   delay(1000);
   dac_bias.Test_Sequence_Triangular_Wave();
+  dac_bias.pulse_bias(5,5,10,10,50,100,false);
 }
