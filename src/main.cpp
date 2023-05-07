@@ -34,5 +34,9 @@ void loop(){
   adc_measure.voltage_measure();
   delay(1000);
   dac_bias.Test_Sequence_Triangular_Wave();
+  dac_bias.transient_IV(0,5,0.0015,1,false);
   dac_bias.pulse_bias(5,5,0.1,100,10,10,50,100,false);
 }
+
+//Return 0
+//Return 1
