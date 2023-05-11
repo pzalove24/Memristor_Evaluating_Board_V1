@@ -4,7 +4,7 @@ void DAC_bias::DAC_setup() {
   // For Adafruit MCP4725A1 the address is 0x62 (default) or 0x63 (ADDR pin tied to VCC)
   // For MCP4725A0 the address is 0x60 or 0x61
   // For MCP4725A2 the address is 0x64 or 0x65
-  dac.begin(0x63);
+  dac.begin(0x60);
   Serial.println("Generating a triangle wave");
 }
 

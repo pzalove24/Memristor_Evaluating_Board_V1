@@ -8,35 +8,36 @@
 #include <ADC.h>
 #include <AD9833.h>
 #include <DAC.h>
+#include <ArduinoJson.h>
+#include <Arduino_FreeRTOS.h>
 
-  /* Use this for the 16-bit version */
+void arduinoTask(void *pvParameters)
+{
+  Serial.begin(9600);
 
-Current_limiter current_limiter(7,6,5,4); //pin digital number
-ADC_measure adc_measure(100); //delay
-#define FNC_PIN 8 //function generator at digital pin number
-AD9833 gen(FNC_PIN);
-DAC_bias dac_bias;
+  while (1)
+  {
+    Serial.println("Arduino is ready");
+    delay(1000);
+  }
+}
+
+void arduinoTask_2(void *pvParameters)
+{
+  Serial.begin(9600);
+
+  while (1)
+  {
+    Serial.println("Arduino is prepared");
+    delay(100);
+  }
+}
 
 void setup() {
-  Serial.begin(9600);
-  current_limiter.Cl_PinSetup();
-  adc_measure.ADC_setup();
-  gen.Begin();
-  gen.ApplySignal(TRIANGLE_WAVE, REG0,10000);
-  dac_bias.DAC_setup();
+  
+  xTaskCreate(arduinoTask, "RED LED Task", 128, NULL, 1, NULL);
+  xTaskCreate(arduinoTask_2, "RED LED Task", 128, NULL, 1, NULL);
+
 }
 
-void loop(){
-  current_limiter.Test_Sequence();
-  adc_measure.Test_Sequence();
-  adc_measure.current_measure();
-  delay(1000);
-  adc_measure.voltage_measure();
-  delay(1000);
-  dac_bias.Test_Sequence_Triangular_Wave();
-  dac_bias.transient_IV(0,5,0.0015,1,false);
-  dac_bias.pulse_bias(5,5,0.1,100,10,10,50,100,false);
-}
-
-//Return 0
-//Return 1
+void loop() {}

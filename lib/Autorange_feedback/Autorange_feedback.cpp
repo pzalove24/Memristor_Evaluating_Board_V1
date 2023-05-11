@@ -149,3 +149,8 @@ void loop()
 
   delay(250);
 }
+
+
+void Handle_current_measure(float Ron, float Voltage, int Rf, int Rg) {
+  float current = ((-Voltage)/((Rf+Ron)*(Rg+Ron)));
+}
