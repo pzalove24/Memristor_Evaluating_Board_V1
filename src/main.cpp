@@ -11,7 +11,27 @@
 #include <ArduinoJson.h>
 #include <Arduino_FreeRTOS.h>
 
-void arduinoTask(void *pvParameters)
+Current_limiter current_limiter(7,6,5,4); //pin digital number
+
+void handleCurrentComplianceTask(void *pvParameters)
+{
+  Serial.begin(9600);
+  current_limiter.Cl_PinSetup();
+
+  while (1)
+  {
+    current_limiter.one_mA();
+    delay(1000);
+    current_limiter.hundred_uA();
+    delay(1000);
+    current_limiter.ten_uA();
+    delay(1000);
+    current_limiter.one_uA();
+    delay(1000);
+  }
+}
+
+void handleReadyStatus(void *pvParameters)
 {
   Serial.begin(9600);
 
@@ -22,21 +42,10 @@ void arduinoTask(void *pvParameters)
   }
 }
 
-void arduinoTask_2(void *pvParameters)
-{
-  Serial.begin(9600);
-
-  while (1)
-  {
-    Serial.println("Arduino is prepared");
-    delay(100);
-  }
-}
-
 void setup() {
   
-  xTaskCreate(arduinoTask, "RED LED Task", 128, NULL, 1, NULL);
-  xTaskCreate(arduinoTask_2, "RED LED Task", 128, NULL, 1, NULL);
+  xTaskCreate(handleCurrentComplianceTask, "handle Current Compliance Task", 128, NULL, 1, NULL);
+  xTaskCreate(handleReadyStatus, "handleReadyStatus", 128, NULL, 1, NULL);
 
 }
 
