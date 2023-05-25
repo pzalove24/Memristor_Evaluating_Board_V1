@@ -17,18 +17,40 @@ void handleCurrentComplianceTask(void *pvParameters)
 {
   Serial.begin(9600);
   current_limiter.Cl_PinSetup();
+  char current_set_from_user = Serial.read();
 
-  while (1)
-  {
-    current_limiter.one_mA();
-    delay(1000);
-    current_limiter.hundred_uA();
-    delay(1000);
-    current_limiter.ten_uA();
-    delay(1000);
-    current_limiter.one_uA();
-    delay(1000);
+  switch (current_set_from_user){
+    case 'one_mA':
+      current_limiter.one_mA();
+      Serial.println(current_set_from_user);
+      break;
+    case 'hundred_uA':
+      current_limiter.hundred_uA();
+      Serial.println(current_set_from_user);
+      break;
+    case 'ten_uA':
+      current_limiter.ten_uA();
+      Serial.println(current_set_from_user);
+      break;
+    case 'one_uA':
+      current_limiter.one_uA();
+      Serial.println(current_set_from_user);
+      break;
+    default:
+      Serial.println("Current Compliance selection is needed");
+      break;
   }
+  // while (1)
+  // {
+  //   current_limiter.one_mA();
+  //   delay(1000);
+  //   current_limiter.hundred_uA();
+  //   delay(1000);
+  //   current_limiter.ten_uA();
+  //   delay(1000);
+  //   current_limiter.one_uA();
+  //   delay(1000);
+  // }
 }
 
 void handleReadyStatus(void *pvParameters)
