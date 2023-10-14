@@ -1,4 +1,4 @@
-#include <ADC.h>
+#include "ADC.h"
 
 ADC_measure::ADC_measure(int delay = 10) {
     _delay = delay;

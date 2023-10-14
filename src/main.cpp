@@ -1,15 +1,19 @@
+// include opensource lib
+// #include <AD9833.h>
+// #include <ADS1256.h>
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 #include <ADS1X15.h>
-#include <Current_limiter.h>
-#include <ADS1256.h>
-#include <MD_AD9833.h>
-#include <ADC.h>
-#include <AD9833.h>
-#include <DAC.h>
-#include <ArduinoJson.h>
 #include <Arduino_FreeRTOS.h>
+#include <ArduinoJson.h>
+#include <MD_AD9833.h>
+// include lib IC_Operation
+#include "ADC/ADC.h"
+#include "DAC/DAC.h"
+// include lib BoardOperation
+#include "Current_limiter/Current_limiter.h"
+
 
 Current_limiter current_limiter(7,6,5,4); //pin digital number
 
