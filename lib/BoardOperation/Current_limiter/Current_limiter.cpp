@@ -1,25 +1,42 @@
-#include "Current_limiter.h"
+#include "Current_Limiter.h"
 
 // const int inPin1 = 7;
 // const int inPin2 = 6;
 // const int inPin3 = 5;
 // const int inPin4 = 4;
 
-Current_limiter::Current_limiter(int MohmPin, int HundredKohmPin, int TenKohmPin, int OneKohmPin) {
+Current_Limiter::Current_Limiter(int MohmPin, int HundredKohmPin, int TenKohmPin, int OneKohmPin)
+{
   _MohmPin = MohmPin;
   _HundredKohmPin = HundredKohmPin;
   _TenKohmPin = TenKohmPin;
-  _OneKohmPin = OneKohmPin;  
+  _OneKohmPin = OneKohmPin;
 }
 
-void Current_limiter::Cl_PinSetup() {
+void Current_Limiter::init()
+{
   pinMode(_MohmPin, OUTPUT);
   pinMode(_HundredKohmPin, OUTPUT);
   pinMode(_TenKohmPin, OUTPUT);
   pinMode(_OneKohmPin, OUTPUT);
 }
 
-void Current_limiter::Test_Sequence() {
+void Current_Limiter::setCurrentRange(string currentRange) {
+
+  string selectCurrentRange = currentRange;
+  switch (selectCurrentRange)
+  {
+  case /* constant-expression */:
+    /* code */
+    break;
+  
+  default:
+    break;
+  }
+}
+
+void Current_Limiter::Test_Sequence()
+{
   Serial.println("1Mohm : 1uA");
   digitalWrite(_MohmPin, HIGH);
   delay(5000);
@@ -46,35 +63,38 @@ void Current_limiter::Test_Sequence() {
   delay(5000);
 };
 
-void Current_limiter::one_uA() {
+void Current_Limiter::one_uA()
+{
   digitalWrite(_MohmPin, HIGH);
   digitalWrite(_HundredKohmPin, LOW);
   digitalWrite(_TenKohmPin, LOW);
   digitalWrite(_OneKohmPin, LOW);
 }
 
-void Current_limiter::ten_uA() {
+void Current_Limiter::ten_uA()
+{
   digitalWrite(_MohmPin, LOW);
   digitalWrite(_HundredKohmPin, HIGH);
   digitalWrite(_TenKohmPin, LOW);
   digitalWrite(_OneKohmPin, LOW);
 }
 
-void Current_limiter::hundred_uA() {
+void Current_Limiter::hundred_uA()
+{
   digitalWrite(_MohmPin, LOW);
   digitalWrite(_HundredKohmPin, LOW);
   digitalWrite(_TenKohmPin, HIGH);
   digitalWrite(_OneKohmPin, LOW);
 }
 
-void Current_limiter::one_mA() {
+void Current_Limiter::one_mA()
+{
   digitalWrite(_MohmPin, LOW);
   digitalWrite(_HundredKohmPin, LOW);
   digitalWrite(_TenKohmPin, LOW);
   digitalWrite(_OneKohmPin, HIGH);
 }
 
-
-void Current_limiter::Gain_R_feedback() {
-  
+void Current_Limiter::Gain_R_feedback()
+{
 }
