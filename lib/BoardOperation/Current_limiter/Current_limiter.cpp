@@ -28,18 +28,23 @@ void Current_Limiter::setCurrentRange(char currentRange)
   {
   case 'A': // 1uA
     one_uA();
+    Serial.println('Current Range is +- 1 uA');
     break;
   case 'B': // 10uA
     ten_uA();
+    Serial.println('Current Range is +- 10 uA');
     break;
   case 'C': // 100uA
     hundred_uA();
+    Serial.println('Current Range is +- 100 uA');
     break;
   case 'D': // 1mA
     one_mA();
+    Serial.println('Current Range is +- 1 mA');
     break;
   default:
     one_uA();
+    Serial.println('Current Range is +- 1 uA');
     break;
   }
 }
