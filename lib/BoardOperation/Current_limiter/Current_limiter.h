@@ -5,29 +5,28 @@
 class Current_Limiter
 {
 private:
-    int _MohmPin;
-    int _HundredKohmPin;
-    int _TenKohmPin;
-    int _OneKohmPin;
+    byte _MohmPin;
+    byte _HundredKohmPin;
+    byte _TenKohmPin;
+    byte _OneKohmPin;
 
 public:
     // Include
 
     // Constructor
-    Current_Limiter(int MohmPin, int HundredKohmPin, int TenKohmPin, int OneKohmPin);
+    Current_Limiter(byte MohmPin, byte HundredKohmPin, byte TenKohmPin, byte OneKohmPin);
 
     // Setter
     void init();
-    void setCurrentRange(string currentRange)
-
-    // Getter
-
-    void Test_Sequence();
-    void Gain_R_feedback();
+    void setCurrentRange(char currentRange); // A :1uA, B:10uA, C:100uA, D:1mA
     void one_uA();
     void ten_uA();
     void hundred_uA();
     void one_mA();
+
+    // Getter
+    void Test_Sequence();
+    void Gain_R_feedback();
 };
 
 #endif

@@ -9,18 +9,18 @@
 #include <ArduinoJson.h>
 #include <MD_AD9833.h>
 // include lib IC_Operation
-#include "ADC/ADC.h"
-#include "DAC/DAC.h"
+#include "ADC_Read/ADC_Read.h"
+#include "DAC_Bias/DAC_Bias.h"
 // include lib BoardOperation
 #include "Current_limiter/Current_limiter.h"
 
 
-Current_limiter current_limiter(7,6,5,4); //pin digital number
+Current_Limiter current_limiter(7,6,5,4); //pin digital number
 
 void handleCurrentComplianceTask(void *pvParameters)
 {
   Serial.begin(9600);
-  current_limiter.Cl_PinSetup();
+  current_limiter.init();
   char current_set_from_user = Serial.read();
 
   switch (current_set_from_user){

@@ -5,7 +5,7 @@
 // const int inPin3 = 5;
 // const int inPin4 = 4;
 
-Current_Limiter::Current_Limiter(int MohmPin, int HundredKohmPin, int TenKohmPin, int OneKohmPin)
+Current_Limiter::Current_Limiter(byte MohmPin, byte HundredKohmPin, byte TenKohmPin, byte OneKohmPin)
 {
   _MohmPin = MohmPin;
   _HundredKohmPin = HundredKohmPin;
@@ -21,16 +21,25 @@ void Current_Limiter::init()
   pinMode(_OneKohmPin, OUTPUT);
 }
 
-void Current_Limiter::setCurrentRange(string currentRange) {
+void Current_Limiter::setCurrentRange(char currentRange)
+{
 
-  string selectCurrentRange = currentRange;
-  switch (selectCurrentRange)
+  switch (currentRange)
   {
-  case /* constant-expression */:
-    /* code */
+  case 'A': // 1uA
+    one_uA();
     break;
-  
+  case 'B': // 10uA
+    ten_uA();
+    break;
+  case 'C': // 100uA
+    hundred_uA();
+    break;
+  case 'D': // 1mA
+    one_mA();
+    break;
   default:
+    one_uA();
     break;
   }
 }
