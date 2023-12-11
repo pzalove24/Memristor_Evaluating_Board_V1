@@ -32,3 +32,5 @@ Start_Sending_SweepIVcurve
 .
 Finish_Sending_SweepIVcurve
 Finish_SweepIVcurve
+
+C_3710.10 V_1.20 PW_0.005 VR_0.5 CT_s

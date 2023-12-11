@@ -1,0 +1,58 @@
+Let's walk through the code execution with the given serial port data "ivpb_s,0.12345,0.12345,1mA,0.12345,4.11E-05,3000.333":
+
+1. **Read Data from Serial Port:**
+   ```cpp
+   String data = Serial.readStringUntil('\n');
+   ```
+   Assuming the data is available on the serial port, it reads the incoming data until a newline character ('\n') is received. The variable `data` now holds the value "ivpb_s,0.12345,0.12345,1mA,0.12345,4.11E-05,3000.333".
+
+2. **Convert String to Character Array:**
+   ```cpp
+   char buffer[data.length() + 1];
+   data.toCharArray(buffer, sizeof(buffer));
+   ```
+   This converts the `String` data into a null-terminated character array (`buffer`). After this line, `buffer` would look like:
+   ```
+   buffer: ['i', 'v', 'p', 'b', '_', 's', ',', '0', '.', '1', '2', '3', '4', '5', ',', '0', '.', '1', '2', '3', '4', '5', ',', '1', 'm', 'A', ',', '0', '.', '1', '2', '3', '4', '5', ',', '4', '.', '1', '1', 'E', '-', '0', '5', ',', '3', '0', '0', '0', '.', '3', '3', '3', '\0']
+   ```
+
+3. **Split String based on Commas:**
+   ```cpp
+   const size_t maxTokens = 7;  // Maximum number of tokens in your example
+   char* tokens[maxTokens];
+
+   splitString(buffer, tokens, maxTokens, ',');
+   ```
+   The `splitString` function is called to split the character array `buffer` based on commas. It creates an array of pointers to char (`tokens`) and stores each token in a separate memory location. After this line, the `tokens` array would contain pointers to the following strings:
+   ```
+   tokens[0]: "ivpb_s"
+   tokens[1]: "0.12345"
+   tokens[2]: "0.12345"
+   tokens[3]: "1mA"
+   tokens[4]: "0.12345"
+   tokens[5]: "4.11E-05"
+   tokens[6]: "3000.333"
+   ```
+
+4. **Print Tokens:**
+   ```cpp
+   printTokens(tokens, maxTokens);
+   ```
+   The `printTokens` function is called to print each token. The output on the serial monitor would be:
+   ```
+   ivpb_s
+   0.12345
+   0.12345
+   1mA
+   0.12345
+   4.11E-05
+   3000.333
+   ```
+
+5. **Free Allocated Memory:**
+   ```cpp
+   freeTokens(tokens, maxTokens);
+   ```
+   The `freeTokens` function is called to release the memory allocated for each token using `malloc`. This step is crucial to prevent memory leaks.
+
+So, the final output on the serial monitor would be the individual tokens extracted from the original serial port data.
