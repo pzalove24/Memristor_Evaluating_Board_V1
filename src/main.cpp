@@ -134,21 +134,137 @@ void sendTokensInSingleLine(char *tokens[], size_t numTokens)
   Serial.println(); // Add a newline character at the end
 }
 
-bool isStringInList(const char *tokens[], const char *stringList[], size_t listSize)
-{
-  for (size_t i = 0; i < listSize; ++i)
-  {
-    if (strcmp(tokens[0], stringList[i]) == 0)
-    {
-      return true; // Match found
-    }
-  }
-  return false; // No match found
-}
+// bool isStringInList(const char *tokens[], const char *stringList[], size_t listSize)
+// {
+//   for (size_t i = 0; i < listSize; ++i)
+//   {
+//     if (strcmp(tokens[0], stringList[i]) == 0)
+//     {
+//       return true; // Match found
+//     }
+//   }
+//   return false; // No match found
+// }
 
 void processTokens(char *tokens[], size_t numTokens)
 {
 }
+
+//** matching benchmark type **//
+const char *testSerialPortWeb[] = {"tw"};                                                   // listIndex 0
+const char *manualOperationWeb[] = {"mrw", "mww"};                                          // listIndex 1
+const char *standardBenchmarkPulseWeb[] = {"ivpw", "llpw", "oopw", "dipw", "cupw", "cppw"}; // listIndex 2
+const char *standardBenchmarkSweepWeb[] = {"ivsw", "llsw", "oosw", "disw", "cusw", "cpsw"}; // listIndex 3
+const char *stabilityBenchmarkPulseWeb[] = {"ecpw", "rtpw"};                                // listIndex 4
+const char *stabilityBenchmarkSweepWeb[] = {"ecsw", "rtsw"};                                // listIndex 5
+const char *advancedBenchmarkPulseWeb[] = {"ivmcpw", "ivmvpw"};                             // listIndex 6
+const char *advancedBenchmarkSweepWeb[] = {"ivmcsw", "ivmvsw"};                             // listIndex 7
+
+const char **lists[] = {
+    testSerialPortWeb,
+    manualOperationWeb,
+    standardBenchmarkPulseWeb,
+    standardBenchmarkSweepWeb,
+    stabilityBenchmarkPulseWeb,
+    stabilityBenchmarkSweepWeb,
+    advancedBenchmarkPulseWeb,
+    advancedBenchmarkSweepWeb};
+
+size_t numLists = sizeof(lists) / sizeof(lists[0]);
+
+size_t listSizes[] = {
+    sizeof(testSerialPortWeb) / sizeof(testSerialPortWeb[0]),
+    sizeof(manualOperationWeb) / sizeof(manualOperationWeb[0]),
+    sizeof(standardBenchmarkPulseWeb) / sizeof(standardBenchmarkPulseWeb[0]),
+    sizeof(standardBenchmarkSweepWeb) / sizeof(standardBenchmarkSweepWeb[0]),
+    sizeof(stabilityBenchmarkPulseWeb) / sizeof(stabilityBenchmarkPulseWeb[0]),
+    sizeof(stabilityBenchmarkSweepWeb) / sizeof(stabilityBenchmarkSweepWeb[0]),
+    sizeof(advancedBenchmarkPulseWeb) / sizeof(advancedBenchmarkPulseWeb[0]),
+    sizeof(advancedBenchmarkSweepWeb) / sizeof(advancedBenchmarkSweepWeb[0]),
+};
+
+bool isStringInList(const char *input, const char *list[], size_t listSize)
+{
+  for (size_t j = 0; j < listSize; ++j)
+  {
+    if (strcmp(input, list[j]) == 0)
+    {
+      return true; // Match found
+    }
+  }
+  return false; // No match found in the current list
+}
+
+//** END **//
+
+//** Function Selection Benchmark **/
+void processCommand(size_t listIndex, String data)
+{
+  switch (listIndex)
+  {
+  case 0:
+    // Handle "tw" command
+    Serial.println("Handling tw command");
+    Serial.println("Ready");
+    // Add your tw command logic here
+    break;
+
+  case 1:
+    // Handle "mrw" or "mww" command
+    Serial.println("Handling mrw or mww command");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 2:
+    // Handle "mrw" or "mww" command
+    Serial.println("standardBenchmarkPulseWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 3:
+    // Handle "mrw" or "mww" command
+    Serial.println("standardBenchmarkSweepWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 4:
+    // Handle "mrw" or "mww" command
+    Serial.println("stabilityBenchmarkPulseWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 5:
+    // Handle "mrw" or "mww" command
+    Serial.println("stabilityBenchmarkSweepWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 6:
+    // Handle "mrw" or "mww" command
+    Serial.println("advancedBenchmarkPulseWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+
+  case 7:
+    // Handle "mrw" or "mww" command
+    Serial.println("advancedBenchmarkSweepWeb");
+    Serial.println("Ready");
+    // Add your mrw or mww command logic here
+    break;
+  default:
+    Serial.println("Unknown command");
+    Serial.println("Ready");
+    break;
+  }
+}
+
+//** END **//
 
 void setup()
 {
@@ -178,6 +294,22 @@ void loop()
 
     // Send all tokens in a single line through the serial port
     sendTokensInSingleLine(tokens, maxTokens);
+
+    // Check if the input matches any string in the lists
+    for (size_t i = 0; i < numLists; ++i)
+    {
+      const char **currentList = lists[i];
+      size_t listSize = listSizes[i];
+
+      if (isStringInList(tokens[0], currentList, listSize))
+      {
+        Serial.println("Input matched a string in the lists");
+        processCommand(i, tokens[0]);
+        return; // Match found, exit loop
+      }
+    }
+
+    Serial.println("Input does not get matched a string in the lists");
 
     if (tokens[0])
 
